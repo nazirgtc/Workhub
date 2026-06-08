@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Desktop Workspace & Student Lead Hub</title>
+    <style>
+        :root {
+            /* Minimalist Apple-inspired design variables */
+            --bg-color: #f5f5f7;
+            --card-bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-color: #0071e3;
+            --border-color: #d2d2d7;
+            
+            /* Priority Indicators */
+            --tag-high-bg: #ffebeb;
+            --tag-high-text: #ff3b30;
+            --tag-med-bg: #fff4e5;
+            --tag-med-text: #ff9500;
+            --tag-low-bg: #eafaf1;
+            --tag-low-text: #34c759;
+
+            /* Trivia & Insight Elements */
+            --trivia-bg: #f2f2f7;
+            --trivia-text: #1d1d1f;
+
+            /* Note Canvas Presets */
+            --note-white: #ffffff;
+            --note-sage: #eef7f2;
+            --note-amber: #fff9eb;
+            --note-dark: #1c1c1e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 30px; -webkit-font-smoothing: antialiased; }
+        
+        .dashboard-container { max-width: 1400px; margin: 0 auto; }
+        
+        /* 🧠 Knowledge Capsule Banner */
+        .trivia-banner {
+            background: var(--trivia-bg); padding: 18px 24px; border-radius: 14px; margin-bottom: 25px;
+            color: var(--trivia-text); border: 1px solid var(--border-color);
+        }
+        .trivia-banner h4 { margin: 0; font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .trivia-banner p { margin: 6px 0 0 0; font-size: 0.95rem; line-height: 1.5; color: #424245; }
+        
+        /* Premium Navigation Tabs */
+        .tab-menu { display: flex; gap: 8px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; flex-wrap: wrap; }
+        .tab-btn {
+            background: none; border: none; padding: 10px 18px; font-size: 0.95rem; font-weight: 500;
+            color: var(--text-secondary); cursor: pointer; border-radius: 8px; transition: all 0.2s ease;
+        }
+        .tab-btn:hover { background: #e8e8ed; color: var(--text-main); }
+        .tab-btn.active { background: var(--accent-color); color: #ffffff; font-weight: 600; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* General Layout Grid Components */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        @media (min-width: 900px) { .dashboard-grid { grid-template-columns: 1.2fr 1fr; } }
+
+        .card {
+            background: var(--card-bg); border-radius: 14px; padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid var(--border-color); margin-bottom: 25px;
+        }
+
+        h2 { margin-bottom: 18px; font-size: 1.3rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        h3 { margin: 18px 0 10px 0; font-size: 1.05rem; font-weight: 600; color: var(--text-main); }
+        hr { border: 0; border-top: 1px solid var(--border-color); margin: 20px 0; }
+
+        /* Universal Form Fields Layout */
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], select { 
+            padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: #ffffff; font-size: 0.95rem; height: 42px; color: var(--text-main);
+        }
+        input[type="text"] { flex-grow: 2; }
+        
+        .btn {
+            background: var(--accent-color); color: #ffffff; border: none; padding: 0 20px; height: 42px;
+            border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.95rem; white-space: nowrap; transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary { background: #e8e8ed; color: var(--text-main); }
+
+        /* List Items Styling */
+        .task-list { list-style: none; }
+        .task-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 10px; border-bottom: 1px solid #f5f5f7; }
+        .task-item:last-child { border-bottom: none; }
+        .task-item.completed span { text-decoration: line-through; color: var(--text-secondary); }
+        .task-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-color); margin-right: 4px; }
+        .delete-btn { background: none; border: none; color: #ff3b30; cursor: pointer; font-size: 1rem; padding: 0 4px; }
+
+        .priority-badge { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 12px; text-transform: uppercase; margin-left: 10px; }
+        .priority-high { background-color: var(--tag-high-bg); color: var(--tag-high-text); }
+        .priority-medium { background-color: var(--tag-med-bg); color: var(--tag-med-text); }
+        .priority-low { background-color: var(--tag-low-bg); color: var(--tag-low-text); }
+
+        /* 📅 HIGH-PERFORMANCE FULL MONTH CALENDAR CLASSES */
+        .cal-ctrl-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .cal-ctrl-title { font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
+        .cal-btn-group { display: flex; gap: 6px; }
+        .cal-nav-btn { background: #e8e8ed; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .cal-nav-btn:hover { background: #d2d2d7; }
+        
+        .calendar-month-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 4px; }
+        .calendar-weekday-lbl { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); padding: 6px 0; text-transform: uppercase; }
+        .calendar-cell-date { padding: 12px 2px; background: #f5f5f7; border-radius: 8px; font-weight: 500; font-size: 0.95rem; color: #4b5563; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .calendar-cell-date.empty-cell { background: transparent; color: #d2d2d7; }
+        .calendar-cell-date.is-today-match { background: var(--accent-color); color: #ffffff !important; font-weight: 700; }
+        .calendar-cell-date.has-events-dot::after { content: ''; width: 6px; height: 6px; background: #ff9500; border-radius: 50%; position: absolute; bottom: 4px; }
+        .calendar-cell-date.is-today-match.has-events-dot::after { background: #ffffff; }
+
+        /* 🎨 PALETTE NOTE SYSTEM CLASSES */
+        .notes-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 15px; }
+        @media (min-width: 768px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+        .note-pad { border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); transition: all 0.2s ease; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .note-textarea { width: 100%; height: 180px; border: none; background: transparent; resize: none; font-size: 1rem; outline: none; line-height: 1.5; color: inherit; }
+        .note-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
+        .note-dark .note-footer { border-top-color: rgba(255,255,255,0.1); }
+        .color-selectors { display: flex; gap: 6px; }
+        .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid #ffffff; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
+
+        /* 📋 OSAP DIRECTORY TABLE CLASSES */
+        .osap-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .student-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; background: #fff; }
+        .student-table th, .student-table td { padding: 14px 16px; border-bottom: 1px solid #f5f5f7; }
+        .student-table th { background-color: #f5f5f7; font-weight: 600; color: var(--text-main); }
+        .student-table tr:hover { background-color: #fafafa; }
+
+        /* Global Flag Image Scaler Fix */
+        img, svg, .emoji { width: 18px !important; height: 18px !important; max-width: 18px !important; display: inline-block !important; vertical-align: middle !important; margin: 0 2px !important; }
+        .feed-title img { width: 22px !important; height: 22px !important; }
+
+        /* Immigration News Matrix */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 992px) { .news-grid { grid-template-columns: repeat(3, 1fr); } }
+        .feed-box { background: #fafafa; border-radius: 10px; padding: 18px; border: 1px solid var(--border-color); }
+        .feed-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
+        .feed-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .feed-list li { font-size: 0.9rem; line-height: 1.45; border-bottom: 1px dashed #e5e7eb; padding-bottom: 10px; }
+        .feed-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .feed-list li a { color: var(--accent-color); text-decoration: none; font-weight: 600; block: margin-bottom: 3px; }
+        .feed-list li a:hover { text-decoration: underline; }
+        .feed-date { font-size: 0.78rem; color: var(--text-secondary); display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- 🧠 LIGHTNING KNOWLEDGE ENGINE (TRIVIA & SCIENCE) -->
+        <div class="trivia-banner">
+            <h4 id="desktopTriviaTitle">🌍 Knowledge Capsule loading...</h4>
+            <p id="desktopTriviaContent"></p>
+        </div>
+
+        <!-- APP INTERFACE SWITCHBOARD NAVIGATION -->
+        <div class="tab-menu">
+            <button class="tab-btn active" onclick="switchDesktopTab('desktop-workspace')">💼 My Workspace</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-notes')">🎨 Palette Notes</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-osap')">📋 OSAP Student Pipeline</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-immigration')">🗺️ Immigration News Terminal</button>
+        </div>
+
+        <!-- ================= TAB 1: PRODUCTION WORKSPACE ================= -->
+        <div id="desktop-workspace" class="tab-content active">
+            <div class="dashboard-grid">
+                
+                <!-- Left Block: Action checklists -->
+                <div class="main-content">
+                    <div class="card">
+                        <h2>📝 Daily Task Checklist</h2>
+                        <div class="input-group">
+                            <input type="text" id="desktopTaskInput" placeholder="Add a task, project milestone or activity...">
+                            <select id="desktopPriorityInput">
+                                <option value="high">🔴 High</option>
+                                <option value="medium" selected>🟡 Medium</option>
+                                <option value="low">🟢 Low</option>
+                            </select>
+                            <button class="btn" onclick="addDesktopTask()">Add Task</button>
+                        </div>
+                        <ul id="desktopActiveTasks" class="task-list"></ul>
+                    </div>
+
+                    <div class="card">
+                        <h2>✅ Completed Activities</h2>
+                        <ul id="desktopCompletedTasks" class="task-list"></ul>
+                    </div>
+                </div>
+
+                <!-- Right Block: Dynamic Interactive Calendar Console -->
+                <div class="sidebar">
+                    <div class="card">
+                        <h2>📅 Full Month Schedule</h2>
+                        
+                        <!-- Month Swapping Top Controls -->
+                        <div class="cal-ctrl-wrapper">
+                            <div class="cal-ctrl-title" id="calDisplayLabel">June 2026</div>
+                            <div class="cal-btn-group">
+                                <button class="cal-nav-btn" onclick="navigateCalendarMonth(-1)">‹</button>
+                                <button class="cal-nav-btn" onclick="navigateCalendarMonth(1)">›</button>
+                            </div>
+                        </div>
+
+                        <!-- 35-Day Structural Calendar Box Grid -->
+                        <div class="calendar-month-grid" id="monthCalendarGrid"></div>
+                        
+                        <hr>
+                        
+                        <!-- Appointment Logger Input Engine -->
+                        <h3>⏰ Schedule New Appointment</h3>
+                        <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+                            <input type="text" id="apptText" placeholder="Event description (e.g., Client sync)...">
+                            <div style="display:flex; gap:6px;">
+                                <input type="date" id="apptDate" style="width:60%;">
+                                <input type="time" id="apptTime" style="width:40%;">
+                            </div>
+                            <button class="btn" onclick="addCalendarAppointment()">Log Appointment</button>
+                        </div>
+
+                        <h3 style="margin-top:20px; border-bottom:1px solid var(--border-color); padding-bottom:6px;">📋 Slated Events</h3>
+                        <ul id="upcomingAppointmentsList" class="task-list" style="margin-top: 10px; max-height:250px; overflow-y:auto;"></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: 🎨 PALETTE NOTE SYSTEM ================= -->
+        <div id="desktop-notes" class="tab-content">
+            <div class="card">
+                <h2>🎨 Colorful Workspace Note Modules</h2>
+                <p style="color: var(--text-secondary); font-size:0.95rem; margin-bottom: 15px;">Brainstorm ideas freely. Change canvas tones dynamically to coordinate subjects. Notes preserve automatically.</p>
+                <button class="btn" onclick="addNewNote()">➕ Spawn New Palette Pad</button>
+                
+                <div class="notes-grid" id="notesContainer"></div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: 📋 OSAP STUDENT PIPELINE REGISTER ================= -->
+        <div id="desktop-osap" class="tab-content">
+            <div class="card">
+                <h2>📋 OSAP Interest Intake Registry</h2>
+                <p style="color: var(--text-secondary); font-size:0.95rem; margin-bottom: 20px;">Track prospective domestic applicants inquiring about the Ontario Student Assistance Program (OSAP).</p>
+                
+                <div class="osap-form">
+                    <input type="text" id="stdName" placeholder="Full Name">
+                    <input type="email" id="stdEmail" placeholder="Email Address">
+                    <input type="tel" id="stdPhone" placeholder="Phone Number">
+                    <input type="text" id="stdCollege" placeholder="Target College Name (e.g. Seneca, Humber)">
+                </div>
+                <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="addStudentLead()">Add Student to Interest Roster</button>
+                
+                <hr>
+                
+                <div style="display: flex; gap: 10px; align-items: center; margin-top: 15px;">
+                    <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="🔍 Instant search by name or college filter...">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="student-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email Address</th>
+                                <th>Phone Number</th>
+                                <th>Target College</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: GLOBAL IMMIGRATION TRACKER ================= -->
+        <div id="desktop-immigration" class="tab-content">
+            <div class="card">
+                <h2>🗺️ Multi-National Immigration Update Portal</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 22px;">Monitors structural rules, policy changes, and visa window adjustments dynamically.</p>
+                
+                <div class="news-grid">
+                    <!-- Canada -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇨🇦 Canada (IRCC)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html" target="_blank">IRCC Levels Plan Adjustment</a><span class="feed-date">Immigration Levels stabilization baseline tracking through 2028.</span></li>
+                            <li><a href="https://www.cicnews.com/" target="_blank">Provincial Nomination Program (PNP) Draws</a><span class="feed-date">Regional allocations targeting construction, tech, and health professionals.</span></li>
+                        </ul>
+                    </div>
+                    <!-- Australia -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇦🇺 Australia (Home Affairs)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels" target="_blank">Migration Program Target Set</a><span class="feed-date">Planning framework prioritizing onshore applicants to limit net overseas expansion.</span></li>
+                            <li><a href="https://immi.homeaffairs.gov.au/" target="_blank">Points Test Framework Adjustments</a><span class="feed-date">Department structural review favoring specialized technical disciplines.</span></li>
+                        </ul>
+                    </div>
+                    <!-- United Kingdom -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇬🇧 United Kingdom (Home Office)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank">Skilled Worker Payroll Governance Rule</a><span class="feed-date">Mandatory localized salary benchmarks checked per specific compliance pay cycle.</span></li>
+                            <li><a href="https://www.gov.uk/global-talent" target="_blank">Global Talent Expansion Stream</a><span class="feed-date">Fast-track processing routes for design and artificial intelligence subject-matter experts.</span></li>
+                        </ul>
+                    </div>
+                    <!-- USA -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇺🇸 United States (USCIS / DOS)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.uscis.gov/" target="_blank">USCIS Adjustment of Status (AOS) Mandate</a><span class="feed-date">New policy directive detailing standard processing evaluations inside domestic centers.</span></li>
+                            <li><a href="https://travel.state.gov/" target="_blank">H-1B Allocation Processing Adjustments</a><span class="feed-date">Department guidelines prioritizing compensation-indexed visa applications.</span></li>
+                        </ul>
+                    </div>
+                    <!-- Malaysia -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇲🇾 Malaysia (Immigration Dept)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.imi.gov.my/" target="_blank">MM2H Premium Criteria Review</a><span class="feed-date">Streamlined visa verification checks and tiered financial thresholds active.</span></li>
+                            <li><a href="https://mdec.my/" target="_blank">DE Rantau Digital Nomad Pass</a><span class="feed-date">Expansion of localized hub networks for certified remote technical consultants.</span></li>
+                        </ul>
+                    </div>
+                    <!-- New Zealand -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇳🇿 New Zealand (INZ)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.immigration.govt.nz/" target="_blank">Accredited Employer Work Visa (AEWV)</a><span class="feed-date">Stricter English language requirements and skill verification processes for core sectors.</span></li>
+                            <li><a href="https://www.immigration.govt.nz/" target="_blank">Green List Straight to Residence Pathway</a><span class="feed-date">Updated priority registration windows for target civil engineering talent.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CORE INTEGRATED APPLICATION ENGINE SCRIPTS -->
+    <script>
+        // Local database storage deployment layer v10
+        let appState = JSON.parse(localStorage.getItem('macbook_workspace_v10')) || {
+            tasks: [],
+            appointments: [], // Houses timeline appointments objects
+            notes: [
+                { id: 1, text: "Welcome to your high-performance schedule command space...", theme: "white" }
+            ],
+            students: []
+        };
+
+        // Track calendar display position state
+        let currentCalendarDate = new Date();
+
+        function saveAppState() {
+            localStorage.setItem('macbook_workspace_v10', JSON.stringify(appState));
+            renderDesktopTasks();
+            renderCalendarMonthGrid();
+            renderUpcomingAppointmentsList();
+            renderPaletteNotes();
+            renderStudentLeads();
+        }
+
+        function switchDesktopTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // --- Tab 1: Checklist Framework ---
+        function addDesktopTask() {
+            const input = document.getElementById('desktopTaskInput');
+            const priority = document.getElementById('desktopPriorityInput').value;
+            if (!input.value.trim()) return;
+            appState.tasks.push({ id: Date.now(), text: input.value, completed: false, priority: priority });
+            input.value = '';
+            document.getElementById('desktopPriorityInput').value = 'medium';
+            saveAppState();
+        }
+
+        function toggleDesktopTask(id) {
+            const task = appState.tasks.find(t => t.id === id);
+            if (task) task.completed = !task.completed;
+            saveAppState();
+        }
+
+        function deleteDesktopTask(id) {
+            appState.tasks = appState.tasks.filter(t => t.id !== id);
+            saveAppState();
+        }
+
+        function renderDesktopTasks() {
+            const activeList = document.getElementById('desktopActiveTasks');
+            const completedList = document.getElementById('desktopCompletedTasks');
+            if(!activeList || !completedList) return;
+            activeList.innerHTML = ''; completedList.innerHTML = '';
+            
+            const weights = { high: 1, medium: 2, low: 3 };
+            const sorted = [...appState.tasks].sort((a, b) => weights[a.priority] - weights[b.priority]);
+
+            sorted.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                const badge = task.completed ? '' : `<span class="priority-badge priority-${task.priority}">${task.priority}</span>`;
+
+                li.innerHTML = `
+                    <label style="display:flex; align-items:center; gap:12px; width:85%; cursor:pointer; font-weight:500;">
+                        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleDesktopTask(${task.id})">
+                        <span>${task.text}</span>
+                        ${badge}
+                    </label>
+                    <button class="delete-btn" onclick="deleteDesktopTask(${task.id})">✕</button>
+                `;
+                if (task.completed) completedList.appendChild(li);
+                else activeList.appendChild(li);
+            });
+        }
+
+        // --- 📅 Tab 1 Sidebar: Advanced Calendar Grid Engine ---
+        function navigateCalendarMonth(direction) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + direction);
+            renderCalendarMonthGrid();
+        }
+
+        function renderCalendarMonthGrid() {
+            const gridContainer = document.getElementById('monthCalendarGrid');
+            const displayLabel = document.getElementById('calDisplayLabel');
+            if(!gridContainer || !displayLabel) return;
+
+            gridContainer.innerHTML = '';
+            
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            const monthsNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
+            displayLabel.innerText = `${monthsNames[month]} ${year}`;
+
+            // Inject weekday labels headers
+            const labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+            labels.forEach(lbl => {
+                const dayLabelEl = document.createElement('div');
+                dayLabelEl.className = 'calendar-weekday-lbl';
+                dayLabelEl.innerText = lbl;
+                gridContainer.appendChild(dayLabelEl);
+            });
+
+            // Find first day configuration spacing parameters
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const todayObj = new Date();
+
+            // Render padding spacer days block cells
+            for (let i = 0; i < firstDayIndex; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell-date empty-cell';
+                gridContainer.appendChild(cell);
+            }
+
+            // Render functional active day number nodes
+            for (let day = 1; day <= totalDaysInMonth; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell-date';
+                cell.innerText = day;
+
+                // Match layout timestamp signature strings
+                const currentCellDateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                // Mark current day highlights
+                if(day === todayObj.getDate() && month === todayObj.getMonth() && year === todayObj.getFullYear()) {
+                    cell.classList.add('is-today-match');
+                }
+
+                // Check if date target contains slate appointments to display indicator dot
+                const hasAppointments = appState.appointments.some(appt => appt.date === currentCellDateString);
+                if (hasAppointments) {
+                    cell.classList.add('has-events-dot');
+                }
+
+                gridContainer.appendChild(cell);
+            }
+        }
+
+        function addCalendarAppointment() {
+            const textInput = document.getElementById('apptText');
+            const dateInput = document.getElementById('apptDate');
+            const timeInput = document.getElementById('apptTime');
+
+            if(!textInput.value.trim() || !dateInput.value) {
+                alert("Please declare event descriptions and target date parameters.");
+                return;
+            }
+
+            appState.appointments.push({
+                id: Date.now(),
+                text: textInput.value.trim(),
+                date: dateInput.value, // Expected raw string target format: YYYY-MM-DD
+                time: timeInput.value || '00:00'
+            });
+
+            textInput.value = '';
+            dateInput.value = '';
+            timeInput.value = '';
+            
+            saveAppState();
+        }
+
+        function removeCalendarAppointment(id) {
+            appState.appointments = appState.appointments.filter(a => a.id !== id);
+            saveAppState();
+        }
+
+        function renderUpcomingAppointmentsList() {
+            const listContainer = document.getElementById('upcomingAppointmentsList');
+            if(!listContainer) return;
+            listContainer.innerHTML = '';
+
+            // Sort chronology layout parameters
+            const sortedAppts = [...appState.appointments].sort((a,b) => {
+                return a.date.localeCompare(b.date) || a.time.localeCompare(b.time);
+            });
+
+            if(sortedAppts.length === 0) {
+                listContainer.innerHTML = `<li style="font-size:0.88rem; color:var(--text-secondary); text-align:center; padding:15px 0;">No active slated schedule nodes.</li>`;
+                return;
+            }
+
+            sortedAppts.forEach(appt => {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                
+                // Humanize date readability layout parameters
+                const [y, m, d] = appt.date.split('-');
+                const displayShortDate = `${m}/${d}`;
+
+                li.innerHTML = `
+                    <div style="display:flex; flex-direction:column; gap:2px; max-width:80%;">
+                        <span style="font-weight:600; font-size:0.92rem;">${appt.text}</span>
+                        <span style="font-size:0.78rem; color:var(--accent-color); font-weight:500;">📅 ${displayShortDate} @ ⏰ ${appt.time}</span>
+                    </div>
+                    <button class="delete-btn" onclick="removeCalendarAppointment(${appt.id})" style="visibility:visible;">✕</button>
+                `;
+                listContainer.appendChild(li);
+            });
+        }
+
+        // --- Tab 2: 🎨 Note Matrix ---
+        function addNewNote() {
+            appState.notes.push({ id: Date.now(), text: '', theme: 'white' });
+            saveAppState();
+        }
+
+        function updateNoteText(id, text) {
+            const note = appState.notes.find(n => n.id === id);
+            if (note) note.text = text;
+            localStorage.setItem('macbook_workspace_v10', JSON.stringify(appState));
+        }
+
+        function changeNoteColor(id, themeName) {
+            const note = appState.notes.find(n => n.id === id);
+            if (note) note.theme = themeName;
+            saveAppState();
+        }
+
+        function deleteNote(id) {
+            appState.notes = appState.notes.filter(n => n.id !== id);
+            saveAppState();
+        }
+
+        function renderPaletteNotes() {
+            const container = document.getElementById('notesContainer');
+            if(!container) return;
+            container.innerHTML = '';
+
+            appState.notes.forEach(note => {
+                const pad = document.createElement('div');
+                pad.className = `note-pad note-${note.theme}`;
+                if(note.theme === 'white') pad.style.background = 'var(--note-white)';
+                if(note.theme === 'sage') pad.style.background = 'var(--note-sage)';
+                if(note.theme === 'amber') pad.style.background = 'var(--note-amber)';
+                if(note.theme === 'dark') { pad.style.background = 'var(--note-dark)'; pad.style.color = '#ffffff'; }
+
+                pad.innerHTML = `
+                    <textarea class="note-textarea" onkeyup="updateNoteText(${note.id}, this.value)" placeholder="Write your thought nodes here...">${note.text}</textarea>
+                    <div class="note-footer">
+                        <div class="color-selectors">
+                            <div class="color-dot" style="background:#ffffff;" onclick="changeNoteColor(${note.id}, 'white')"></div>
+                            <div class="color-dot" style="background:#eef7f2;" onclick="changeNoteColor(${note.id}, 'sage')"></div>
+                            <div class="color-dot" style="background:#fff9eb;" onclick="changeNoteColor(${note.id}, 'amber')"></div>
+                            <div class="color-dot" style="background:#1c1c1e;" onclick="changeNoteColor(${note.id}, 'dark')"></div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteNote(${note.id})" style="font-weight:600; visibility:visible;">Delete Pad</button>
+                    </div>
+                `;
+                container.appendChild(pad);
+            });
+        }
+
+        // --- Tab 3: Student Pipeline System ---
+        function addStudentLead() {
+            const name = document.getElementById('stdName').value.trim();
+            const email = document.getElementById('stdEmail').value.trim();
+            const phone = document.getElementById('stdPhone').value.trim();
+            const college = document.getElementById('stdCollege').value.trim();
+
+            if (!name || !college) { alert("Name and Target College are required metrics."); return; }
+            appState.students.push({ id: Date.now(), name, email, phone, college });
+            
+            document.getElementById('stdName').value = '';
+            document.getElementById('stdEmail').value = '';
+            document.getElementById('stdPhone').value = '';
+            document.getElementById('stdCollege').value = '';
+            saveAppState();
+        }
+
+        function removeStudentLead(id) {
+            appState.students = appState.students.filter(s => s.id !== id);
+            saveAppState();
+        }
+
+        function renderStudentLeads() {
+            const tbody = document.getElementById('studentTableBody');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            appState.students.forEach(std => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-weight:600;">${std.name}</td>
+                    <td>${std.email || '-'}</td>
+                    <td>${std.phone || '-'}</td>
+                    <td><span style="background:#e8e8ed; padding:3px 8px; border-radius:6px; font-size:0.85rem; font-weight:500;">${std.college}</span></td>
+                    <td><button class="delete-btn" onclick="removeStudentLead(${std.id})" style="visibility:visible;">✕</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterStudentTable() {
+            const query = document.getElementById('tableSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#studentTableBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // --- Knowledge Repository Capsule Data ---
+        const desktopKnowledgeRepo = [
+            { title: "🌍 Earth Science Capsule", content: "The Earth's core is roughly as hot as the surface of the sun—clocking in at roughly 5,500 degrees Celsius (9,930 degrees Fahrenheit)." },
+            { title: "🔬 Deep Earth Trivia", content: "Diamonds are not born from compressed coal. Most diamonds recovered today were formed in the Earth's mantle billions of years ago, way before any land plants existed." },
+            { title: "🌊 Oceanographic Insight", content: "The planet's largest continuous mountain range isn't the Andes; it's the Mid-Oceanic Ridge system, spanning over 65,000 kilometers snaking along the ocean floor." },
+            { title: "🌋 Volcanology Fact", content: "The loudest sound ever recorded on Earth was the 1883 eruption of Krakatoa. It burst the eardrums of people 60 km away, and the shockwave circled the entire planet four full times." },
+            { title: "🌌 Atmospheric Dynamics", content: "Lightning bolts are roughly five times hotter than the visible surface of the sun, heating the surrounding air to 30,000 Kelvin instantly." }
+        ];
+
+        function deployDesktopTrivia() {
+            const index = new Date().getDate() % desktopKnowledgeRepo.length;
+            const item = desktopKnowledgeRepo[index];
+            const titleEl = document.getElementById('desktopTriviaTitle');
+            const contentEl = document.getElementById('desktopTriviaContent');
+            if(titleEl && contentEl) {
+                titleEl.innerHTML = `🧠 ${item.title}`;
+                contentEl.innerText = item.content;
+            }
+        }
+
+        // Run Initialization Matrix On Start
+        window.onload = function() {
+            renderDesktopTasks();
+            renderCalendarMonthGrid();
+            renderUpcomingAppointmentsList();
+            renderPaletteNotes();
+            renderStudentLeads();
+            deployDesktopTrivia();
+        };
+    </script>
+</body>
+</html>
