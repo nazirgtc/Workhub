@@ -73,7 +73,7 @@
 
         /* Universal Form Fields Layout */
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], select { 
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], select { 
             padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: #ffffff; font-size: 0.95rem; height: 42px; color: var(--text-main);
         }
         input[type="text"] { flex-grow: 2; }
@@ -84,6 +84,7 @@
         }
         .btn:hover { opacity: 0.9; }
         .btn-secondary { background: #e8e8ed; color: var(--text-main); }
+        .btn-danger { background: #ff3b30; color: #fff; }
 
         /* List Items Styling */
         .task-list { list-style: none; }
@@ -98,7 +99,7 @@
         .priority-medium { background-color: var(--tag-med-bg); color: var(--tag-med-text); }
         .priority-low { background-color: var(--tag-low-bg); color: var(--tag-low-text); }
 
-        /* 📅 HIGH-PERFORMANCE FULL MONTH CALENDAR CLASSES */
+        /* 📅 CALENDAR BOX GRID STYLE */
         .cal-ctrl-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .cal-ctrl-title { font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
         .cal-btn-group { display: flex; gap: 6px; }
@@ -111,7 +112,6 @@
         .calendar-cell-date.empty-cell { background: transparent; color: #d2d2d7; }
         .calendar-cell-date.is-today-match { background: var(--accent-color); color: #ffffff !important; font-weight: 700; }
         .calendar-cell-date.has-events-dot::after { content: ''; width: 6px; height: 6px; background: #ff9500; border-radius: 50%; position: absolute; bottom: 4px; }
-        .calendar-cell-date.is-today-match.has-events-dot::after { background: #ffffff; }
 
         /* 🎨 PALETTE NOTE SYSTEM CLASSES */
         .notes-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 15px; }
@@ -119,19 +119,32 @@
         .note-pad { border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); transition: all 0.2s ease; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .note-textarea { width: 100%; height: 180px; border: none; background: transparent; resize: none; font-size: 1rem; outline: none; line-height: 1.5; color: inherit; }
         .note-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
-        .note-dark .note-footer { border-top-color: rgba(255,255,255,0.1); }
         .color-selectors { display: flex; gap: 6px; }
         .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid #ffffff; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
 
-        /* 📋 OSAP DIRECTORY TABLE CLASSES */
-        .osap-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        /* 📋 DIRECTORY TABLES */
+        .osap-form, .finance-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
         .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
         .student-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; background: #fff; }
         .student-table th, .student-table td { padding: 14px 16px; border-bottom: 1px solid #f5f5f7; }
         .student-table th { background-color: #f5f5f7; font-weight: 600; color: var(--text-main); }
         .student-table tr:hover { background-color: #fafafa; }
 
-        /* Global Flag Image Scaler Fix */
+        /* 📑 TEMPLATE VAULT AND BOOKMARK DOCK */
+        .vault-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .vault-grid { grid-template-columns: 1fr 1fr; } }
+        .vault-card { border: 1px solid var(--border-color); padding: 18px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; background: #fafafa; }
+        .vault-text { background: #fff; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; font-size: 0.9rem; min-height: 100px; white-space: pre-wrap; color: #374151; }
+
+        .dock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .dock-link { background: #f5f5f7; border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); font-weight: 600; transition: all 0.2s; }
+        .dock-link:hover { background: #fff; border-color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.05); transform: translateY(-2px); }
+
+        /* 🧮 CALC BOX */
+        .calc-box { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #f5f5f7; padding: 15px; border-radius: 10px; margin-top: 15px; }
+        .calc-num { font-size: 1.4rem; font-weight: 700; color: var(--accent-color); }
+
+        /* Global Flag Image Fix */
         img, svg, .emoji { width: 18px !important; height: 18px !important; max-width: 18px !important; display: inline-block !important; vertical-align: middle !important; margin: 0 2px !important; }
         .feed-title img { width: 22px !important; height: 22px !important; }
 
@@ -142,10 +155,8 @@
         .feed-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
         .feed-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
         .feed-list li { font-size: 0.9rem; line-height: 1.45; border-bottom: 1px dashed #e5e7eb; padding-bottom: 10px; }
-        .feed-list li:last-child { border-bottom: none; padding-bottom: 0; }
-        .feed-list li a { color: var(--accent-color); text-decoration: none; font-weight: 600; block: margin-bottom: 3px; }
+        .feed-list li a { color: var(--accent-color); text-decoration: none; font-weight: 600; display: block; margin-bottom: 3px; }
         .feed-list li a:hover { text-decoration: underline; }
-        .feed-date { font-size: 0.78rem; color: var(--text-secondary); display: block; }
     </style>
 </head>
 <body>
@@ -162,7 +173,9 @@
         <div class="tab-menu">
             <button class="tab-btn active" onclick="switchDesktopTab('desktop-workspace')">💼 My Workspace</button>
             <button class="tab-btn" onclick="switchDesktopTab('desktop-notes')">🎨 Palette Notes</button>
-            <button class="tab-btn" onclick="switchDesktopTab('desktop-osap')">📋 OSAP Student Pipeline</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-osap')">📋 OSAP Pipeline & Calc</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-vault')">📑 Document Copier Vault</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-finance')">💰 Cash Flow & Expenses</button>
             <button class="tab-btn" onclick="switchDesktopTab('desktop-immigration')">🗺️ Immigration News Terminal</button>
         </div>
 
@@ -170,7 +183,6 @@
         <div id="desktop-workspace" class="tab-content active">
             <div class="dashboard-grid">
                 
-                <!-- Left Block: Action checklists -->
                 <div class="main-content">
                     <div class="card">
                         <h2>📝 Daily Task Checklist</h2>
@@ -192,12 +204,9 @@
                     </div>
                 </div>
 
-                <!-- Right Block: Dynamic Interactive Calendar Console -->
                 <div class="sidebar">
                     <div class="card">
                         <h2>📅 Full Month Schedule</h2>
-                        
-                        <!-- Month Swapping Top Controls -->
                         <div class="cal-ctrl-wrapper">
                             <div class="cal-ctrl-title" id="calDisplayLabel">June 2026</div>
                             <div class="cal-btn-group">
@@ -205,28 +214,33 @@
                                 <button class="cal-nav-btn" onclick="navigateCalendarMonth(1)">›</button>
                             </div>
                         </div>
-
-                        <!-- 35-Day Structural Calendar Box Grid -->
                         <div class="calendar-month-grid" id="monthCalendarGrid"></div>
-                        
                         <hr>
-                        
-                        <!-- Appointment Logger Input Engine -->
                         <h3>⏰ Schedule New Appointment</h3>
                         <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
-                            <input type="text" id="apptText" placeholder="Event description (e.g., Client sync)...">
+                            <input type="text" id="apptText" placeholder="Event description...">
                             <div style="display:flex; gap:6px;">
                                 <input type="date" id="apptDate" style="width:60%;">
                                 <input type="time" id="apptTime" style="width:40%;">
                             </div>
                             <button class="btn" onclick="addCalendarAppointment()">Log Appointment</button>
                         </div>
-
                         <h3 style="margin-top:20px; border-bottom:1px solid var(--border-color); padding-bottom:6px;">📋 Slated Events</h3>
-                        <ul id="upcomingAppointmentsList" class="task-list" style="margin-top: 10px; max-height:250px; overflow-y:auto;"></ul>
+                        <ul id="upcomingAppointmentsList" class="task-list" style="margin-top: 10px; max-height:200px; overflow-y:auto;"></ul>
                     </div>
                 </div>
 
+            </div>
+
+            <!-- IDEA 5: QUICK LAUNCH BOOKMARK DOCK -->
+            <div class="card">
+                <h2>🔗 System Quick-Launch Dock</h2>
+                <div class="dock-grid">
+                    <a href="https://graduatetrack.com" target="_blank" class="dock-link">🌐 Graduate Track Home</a>
+                    <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/account.html" target="_blank" class="dock-link">🍁 IRCC Portal Secure Gateway</a>
+                    <a href="https://business.facebook.com/" target="_blank" class="dock-link">📈 Meta Business Suite Console</a>
+                    <a href="https://search.google.com/search-console" target="_blank" class="dock-link">🔍 Google Search Console Hub</a>
+                </div>
             </div>
         </div>
 
@@ -236,101 +250,157 @@
                 <h2>🎨 Colorful Workspace Note Modules</h2>
                 <p style="color: var(--text-secondary); font-size:0.95rem; margin-bottom: 15px;">Brainstorm ideas freely. Change canvas tones dynamically to coordinate subjects. Notes preserve automatically.</p>
                 <button class="btn" onclick="addNewNote()">➕ Spawn New Palette Pad</button>
-                
                 <div class="notes-grid" id="notesContainer"></div>
             </div>
         </div>
 
-        <!-- ================= TAB 3: 📋 OSAP STUDENT PIPELINE REGISTER ================= -->
+        <!-- ================= TAB 3: 📋 OSAP REGISTER & IDEA 1: DYNAMIC ESTIMATOR ================= -->
         <div id="desktop-osap" class="tab-content">
-            <div class="card">
-                <h2>📋 OSAP Interest Intake Registry</h2>
-                <p style="color: var(--text-secondary); font-size:0.95rem; margin-bottom: 20px;">Track prospective domestic applicants inquiring about the Ontario Student Assistance Program (OSAP).</p>
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
                 
-                <div class="osap-form">
-                    <input type="text" id="stdName" placeholder="Full Name">
-                    <input type="email" id="stdEmail" placeholder="Email Address">
-                    <input type="tel" id="stdPhone" placeholder="Phone Number">
-                    <input type="text" id="stdCollege" placeholder="Target College Name (e.g. Seneca, Humber)">
+                <!-- OSAP Formula Estimator Tool Box -->
+                <div class="card">
+                    <h2>🧮 Quick Tuition Funding Ratio Calculator (Ontario Rules)</h2>
+                    <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:15px;">Instantly gauge estimates during consultation calls. Factors contemporary baseline funding parameters.</p>
+                    <div class="osap-form" style="margin-bottom:0;">
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Program Discipline Sector</label>
+                            <select id="calcProgram" onchange="runOsapCalculator()" style="width:100%;">
+                                <option value="6500">General College Diploma ($6,500/yr)</option>
+                                <option value="11000">Advanced Technology / Engineering ($11,000/yr)</option>
+                                <option value="9500">Nursing / Health Sciences ($9,500/yr)</option>
+                                <option value="16000">Post-Grad Master Track Programs ($16,000/yr)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Student Status Profile</label>
+                            <select id="calcStatus" onchange="runOsapCalculator()" style="width:100%;">
+                                <option value="at-home">Living At Home / Dependent</option>
+                                <option value="independent">Living Independently / Renting</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-box">
+                        <div>
+                            <div class="score-label">Est. Provincial Grants (25%)</div>
+                            <div class="calc-num" id="osapGrantOut">$0.00</div>
+                        </div>
+                        <div>
+                            <div class="score-label">Est. Repayable Loans (75%)</div>
+                            <div class="calc-num" style="color:#d97706;" id="osapLoanOut">$0.00</div>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="addStudentLead()">Add Student to Interest Roster</button>
-                
-                <hr>
-                
-                <div style="display: flex; gap: 10px; align-items: center; margin-top: 15px;">
+
+                <!-- Intake Logs -->
+                <div class="card">
+                    <h2>📋 OSAP Interest Intake Registry</h2>
+                    <div class="osap-form">
+                        <input type="text" id="stdName" placeholder="Full Name">
+                        <input type="email" id="stdEmail" placeholder="Email Address">
+                        <input type="tel" id="stdPhone" placeholder="Phone Number">
+                        <input type="text" id="stdCollege" placeholder="Target College Name">
+                    </div>
+                    <button class="btn" style="width: 100%;" onclick="addStudentLead()">Add Student to Interest Roster</button>
+                    <hr>
                     <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="🔍 Instant search by name or college filter...">
+                    <div class="table-responsive">
+                        <table class="student-table">
+                            <thead>
+                                <tr><th>Name</th><th>Email Address</th><th>Phone Number</th><th>Target College</th><th>Action</th></tr>
+                            </thead>
+                            <tbody id="studentTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: IDEA 3: EMAIL & DOCUMENT VAULT ================= -->
+        <div id="desktop-vault" class="tab-content">
+            <div class="card">
+                <h2>📑 Document Copier Vault</h2>
+                <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px;">One-click copy systems to speed up applicant communications. Speeds up lead generation outreach.</p>
+                
+                <div class="vault-grid">
+                    <div class="vault-card">
+                        <h4>✉️ OSAP Follow-up Briefing</h4>
+                        <div class="vault-text" id="t1">Hi there,\n\nThank you for reaching out regarding your interest in Ontario higher education pathways. \n\nPlease note that applications for funding assistance parameters are active. We look forward to evaluating your program mapping framework.\n\nBest regards,\nGraduate Track Team</div>
+                        <button class="btn btn-secondary" onclick="copyVaultText('t1')">📋 Copy Text to Clipboard</button>
+                    </div>
+                    
+                    <div class="vault-card">
+                        <h4>📋 Academic Transcript Checklist</h4>
+                        <div class="vault-text" id="t2">Hello,\n\nTo move forward with your profile assessment, please reply with scanned clear copies of:\n1. Secondary School Graduation Diplomas\n2. Complete Semester Transcripts\n3. English Proficiency Score Sheets (if applicable)\n\nThank you!</div>
+                        <button class="btn btn-secondary" onclick="copyVaultText('t2')">📋 Copy Text to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 5: IDEA 4: BUSINESS FINANCE LEDGER ================= -->
+        <div id="desktop-finance" class="tab-content">
+            <div class="card">
+                <h2>💰 Cash Flow Ledger & Business Expenses</h2>
+                <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px;">Track commission revenue payouts alongside advertising overhead costs or file registry expenses.</p>
+                
+                <div class="finance-form">
+                    <input type="text" id="finDesc" placeholder="Item Name / Description (e.g., Meta Ad campaign)">
+                    <select id="finType">
+                        <option value="income">🟢 Commission Income Payout</option>
+                        <option value="expense">🔴 Business Expense Cost</option>
+                    </select>
+                    <input type="number" id="finAmount" placeholder="Amount ($ CAD)">
+                    <button class="btn" onclick="addFinancialTransaction()">Log Entry</button>
+                </div>
+
+                <div class="calc-box" style="margin-bottom:25px; background:#fff; border:1px solid var(--border-color);">
+                    <div>
+                        <div class="score-label">Total Volume Tracked</div>
+                        <div class="calc-num" style="color:var(--text-main);" id="finTotalVolume">$0.00</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Net Operational Margin Profit</div>
+                        <div class="calc-num" id="finNetProfit">$0.00</div>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
                     <table class="student-table">
                         <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email Address</th>
-                                <th>Phone Number</th>
-                                <th>Target College</th>
-                                <th>Action</th>
-                            </tr>
+                            <tr><th>Description</th><th>Type</th><th>Value Amount</th><th>Action</th></tr>
                         </thead>
-                        <tbody id="studentTableBody"></tbody>
+                        <tbody id="financeTableBody"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 4: GLOBAL IMMIGRATION TRACKER ================= -->
+        <!-- ================= TAB 6: GLOBAL IMMIGRATION TRACKER ================= -->
         <div id="desktop-immigration" class="tab-content">
             <div class="card">
                 <h2>🗺️ Multi-National Immigration Update Portal</h2>
                 <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 22px;">Monitors structural rules, policy changes, and visa window adjustments dynamically.</p>
-                
                 <div class="news-grid">
-                    <!-- Canada -->
                     <div class="feed-box">
                         <div class="feed-title">🇨🇦 Canada (IRCC)</div>
                         <ul class="feed-list">
-                            <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html" target="_blank">IRCC Levels Plan Adjustment</a><span class="feed-date">Immigration Levels stabilization baseline tracking through 2028.</span></li>
-                            <li><a href="https://www.cicnews.com/" target="_blank">Provincial Nomination Program (PNP) Draws</a><span class="feed-date">Regional allocations targeting construction, tech, and health professionals.</span></li>
+                            <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html" target="_blank">IRCC Levels Plan Adjustment</a><span style="font-size:0.78rem; color:var(--text-secondary);">Baseline tracking through 2028.</span></li>
+                            <li><a href="https://www.cicnews.com/" target="_blank">Provincial Nomination Draws</a><span style="font-size:0.78rem; color:var(--text-secondary);">Regional allocations targeting specialized profiles.</span></li>
                         </ul>
                     </div>
-                    <!-- Australia -->
                     <div class="feed-box">
                         <div class="feed-title">🇦🇺 Australia (Home Affairs)</div>
                         <ul class="feed-list">
-                            <li><a href="https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels" target="_blank">Migration Program Target Set</a><span class="feed-date">Planning framework prioritizing onshore applicants to limit net overseas expansion.</span></li>
-                            <li><a href="https://immi.homeaffairs.gov.au/" target="_blank">Points Test Framework Adjustments</a><span class="feed-date">Department structural review favoring specialized technical disciplines.</span></li>
+                            <li><a href="https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels" target="_blank">Migration Planning Levels</a><span style="font-size:0.78rem; color:var(--text-secondary);">Framework constraints updates on expansion parameters.</span></li>
                         </ul>
                     </div>
-                    <!-- United Kingdom -->
                     <div class="feed-box">
                         <div class="feed-title">🇬🇧 United Kingdom (Home Office)</div>
                         <ul class="feed-list">
-                            <li><a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank">Skilled Worker Payroll Governance Rule</a><span class="feed-date">Mandatory localized salary benchmarks checked per specific compliance pay cycle.</span></li>
-                            <li><a href="https://www.gov.uk/global-talent" target="_blank">Global Talent Expansion Stream</a><span class="feed-date">Fast-track processing routes for design and artificial intelligence subject-matter experts.</span></li>
-                        </ul>
-                    </div>
-                    <!-- USA -->
-                    <div class="feed-box">
-                        <div class="feed-title">🇺🇸 United States (USCIS / DOS)</div>
-                        <ul class="feed-list">
-                            <li><a href="https://www.uscis.gov/" target="_blank">USCIS Adjustment of Status (AOS) Mandate</a><span class="feed-date">New policy directive detailing standard processing evaluations inside domestic centers.</span></li>
-                            <li><a href="https://travel.state.gov/" target="_blank">H-1B Allocation Processing Adjustments</a><span class="feed-date">Department guidelines prioritizing compensation-indexed visa applications.</span></li>
-                        </ul>
-                    </div>
-                    <!-- Malaysia -->
-                    <div class="feed-box">
-                        <div class="feed-title">🇲🇾 Malaysia (Immigration Dept)</div>
-                        <ul class="feed-list">
-                            <li><a href="https://www.imi.gov.my/" target="_blank">MM2H Premium Criteria Review</a><span class="feed-date">Streamlined visa verification checks and tiered financial thresholds active.</span></li>
-                            <li><a href="https://mdec.my/" target="_blank">DE Rantau Digital Nomad Pass</a><span class="feed-date">Expansion of localized hub networks for certified remote technical consultants.</span></li>
-                        </ul>
-                    </div>
-                    <!-- New Zealand -->
-                    <div class="feed-box">
-                        <div class="feed-title">🇳🇿 New Zealand (INZ)</div>
-                        <ul class="feed-list">
-                            <li><a href="https://www.immigration.govt.nz/" target="_blank">Accredited Employer Work Visa (AEWV)</a><span class="feed-date">Stricter English language requirements and skill verification processes for core sectors.</span></li>
-                            <li><a href="https://www.immigration.govt.nz/" target="_blank">Green List Straight to Residence Pathway</a><span class="feed-date">Updated priority registration windows for target civil engineering talent.</span></li>
+                            <li><a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank">Skilled Worker Payroll Rules</a><span style="font-size:0.78rem; color:var(--text-secondary);">Mandatory localization compliance rules adjustments.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -339,28 +409,27 @@
 
     </div>
 
-    <!-- CORE INTEGRATED APPLICATION ENGINE SCRIPTS -->
+    <!-- CODE INTERACTIONS CORE COMPONENT ACTIONS ENGINE -->
     <script>
-        // Local database storage deployment layer v10
-        let appState = JSON.parse(localStorage.getItem('macbook_workspace_v10')) || {
+        // Master storage dictionary v11
+        let appState = JSON.parse(localStorage.getItem('macbook_workspace_v11')) || {
             tasks: [],
-            appointments: [], // Houses timeline appointments objects
-            notes: [
-                { id: 1, text: "Welcome to your high-performance schedule command space...", theme: "white" }
-            ],
-            students: []
+            appointments: [],
+            notes: [{ id: 1, text: "Graduate Track command center dashboard loaded...", theme: "white" }],
+            students: [],
+            transactions: []
         };
 
-        // Track calendar display position state
         let currentCalendarDate = new Date();
 
         function saveAppState() {
-            localStorage.setItem('macbook_workspace_v10', JSON.stringify(appState));
+            localStorage.setItem('macbook_workspace_v11', JSON.stringify(appState));
             renderDesktopTasks();
             renderCalendarMonthGrid();
             renderUpcomingAppointmentsList();
             renderPaletteNotes();
             renderStudentLeads();
+            renderFinancialLedger();
         }
 
         function switchDesktopTab(tabId) {
@@ -370,7 +439,7 @@
             event.target.classList.add('active');
         }
 
-        // --- Tab 1: Checklist Framework ---
+        // --- Core Tasks engine ---
         function addDesktopTask() {
             const input = document.getElementById('desktopTaskInput');
             const priority = document.getElementById('desktopPriorityInput').value;
@@ -397,20 +466,16 @@
             const completedList = document.getElementById('desktopCompletedTasks');
             if(!activeList || !completedList) return;
             activeList.innerHTML = ''; completedList.innerHTML = '';
-            
             const weights = { high: 1, medium: 2, low: 3 };
             const sorted = [...appState.tasks].sort((a, b) => weights[a.priority] - weights[b.priority]);
-
             sorted.forEach(task => {
                 const li = document.createElement('li');
                 li.className = `task-item ${task.completed ? 'completed' : ''}`;
                 const badge = task.completed ? '' : `<span class="priority-badge priority-${task.priority}">${task.priority}</span>`;
-
                 li.innerHTML = `
-                    <label style="display:flex; align-items:center; gap:12px; width:85%; cursor:pointer; font-weight:500;">
+                    <label style="display:flex; align-items:center; gap:12px; width:85%; cursor:pointer;">
                         <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleDesktopTask(${task.id})">
-                        <span>${task.text}</span>
-                        ${badge}
+                        <span>${task.text}</span> ${badge}
                     </label>
                     <button class="delete-btn" onclick="deleteDesktopTask(${task.id})">✕</button>
                 `;
@@ -419,7 +484,7 @@
             });
         }
 
-        // --- 📅 Tab 1 Sidebar: Advanced Calendar Grid Engine ---
+        // --- Calendar Engine ---
         function navigateCalendarMonth(direction) {
             currentCalendarDate.setMonth(currentCalendarDate.getMonth() + direction);
             renderCalendarMonthGrid();
@@ -429,82 +494,38 @@
             const gridContainer = document.getElementById('monthCalendarGrid');
             const displayLabel = document.getElementById('calDisplayLabel');
             if(!gridContainer || !displayLabel) return;
-
             gridContainer.innerHTML = '';
-            
             const year = currentCalendarDate.getFullYear();
             const month = currentCalendarDate.getMonth();
             const monthsNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            
             displayLabel.innerText = `${monthsNames[month]} ${year}`;
-
-            // Inject weekday labels headers
-            const labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-            labels.forEach(lbl => {
-                const dayLabelEl = document.createElement('div');
-                dayLabelEl.className = 'calendar-weekday-lbl';
-                dayLabelEl.innerText = lbl;
-                gridContainer.appendChild(dayLabelEl);
+            
+            ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(lbl => {
+                const el = document.createElement('div'); el.className = 'calendar-weekday-lbl'; el.innerText = lbl; gridContainer.appendChild(el);
             });
 
-            // Find first day configuration spacing parameters
             const firstDayIndex = new Date(year, month, 1).getDay();
             const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            const todayObj = new Date();
-
-            // Render padding spacer days block cells
             for (let i = 0; i < firstDayIndex; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'calendar-cell-date empty-cell';
-                gridContainer.appendChild(cell);
+                const cell = document.createElement('div'); cell.className = 'calendar-cell-date empty-cell'; gridContainer.appendChild(cell);
             }
-
-            // Render functional active day number nodes
+            const todayObj = new Date();
             for (let day = 1; day <= totalDaysInMonth; day++) {
-                const cell = document.createElement('div');
-                cell.className = 'calendar-cell-date';
-                cell.innerText = day;
-
-                // Match layout timestamp signature strings
-                const currentCellDateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-
-                // Mark current day highlights
-                if(day === todayObj.getDate() && month === todayObj.getMonth() && year === todayObj.getFullYear()) {
-                    cell.classList.add('is-today-match');
-                }
-
-                // Check if date target contains slate appointments to display indicator dot
-                const hasAppointments = appState.appointments.some(appt => appt.date === currentCellDateString);
-                if (hasAppointments) {
-                    cell.classList.add('has-events-dot');
-                }
-
+                const cell = document.createElement('div'); cell.className = 'calendar-cell-date'; cell.innerText = day;
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                if(day === todayObj.getDate() && month === todayObj.getMonth() && year === todayObj.getFullYear()) cell.classList.add('is-today-match');
+                if (appState.appointments.some(appt => appt.date === dateStr)) cell.classList.add('has-events-dot');
                 gridContainer.appendChild(cell);
             }
         }
 
         function addCalendarAppointment() {
-            const textInput = document.getElementById('apptText');
-            const dateInput = document.getElementById('apptDate');
-            const timeInput = document.getElementById('apptTime');
-
-            if(!textInput.value.trim() || !dateInput.value) {
-                alert("Please declare event descriptions and target date parameters.");
-                return;
-            }
-
-            appState.appointments.push({
-                id: Date.now(),
-                text: textInput.value.trim(),
-                date: dateInput.value, // Expected raw string target format: YYYY-MM-DD
-                time: timeInput.value || '00:00'
-            });
-
-            textInput.value = '';
-            dateInput.value = '';
-            timeInput.value = '';
-            
+            const text = document.getElementById('apptText');
+            const date = document.getElementById('apptDate');
+            const time = document.getElementById('apptTime');
+            if(!text.value.trim() || !date.value) return;
+            appState.appointments.push({ id: Date.now(), text: text.value.trim(), date: date.value, time: time.value || '00:00' });
+            text.value = ''; date.value = ''; time.value = '';
             saveAppState();
         }
 
@@ -514,167 +535,124 @@
         }
 
         function renderUpcomingAppointmentsList() {
-            const listContainer = document.getElementById('upcomingAppointmentsList');
-            if(!listContainer) return;
-            listContainer.innerHTML = '';
-
-            // Sort chronology layout parameters
-            const sortedAppts = [...appState.appointments].sort((a,b) => {
-                return a.date.localeCompare(b.date) || a.time.localeCompare(b.time);
-            });
-
-            if(sortedAppts.length === 0) {
-                listContainer.innerHTML = `<li style="font-size:0.88rem; color:var(--text-secondary); text-align:center; padding:15px 0;">No active slated schedule nodes.</li>`;
+            const container = document.getElementById('upcomingAppointmentsList');
+            if(!container) return; container.innerHTML = '';
+            const sorted = [...appState.appointments].sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+            if(sorted.length === 0) {
+                container.innerHTML = `<li style="font-size:0.88rem; color:var(--text-secondary); text-align:center; padding:15px 0;">No active appointments.</li>`;
                 return;
             }
-
-            sortedAppts.forEach(appt => {
-                const li = document.createElement('li');
-                li.className = 'task-item';
-                
-                // Humanize date readability layout parameters
-                const [y, m, d] = appt.date.split('-');
-                const displayShortDate = `${m}/${d}`;
-
-                li.innerHTML = `
-                    <div style="display:flex; flex-direction:column; gap:2px; max-width:80%;">
-                        <span style="font-weight:600; font-size:0.92rem;">${appt.text}</span>
-                        <span style="font-size:0.78rem; color:var(--accent-color); font-weight:500;">📅 ${displayShortDate} @ ⏰ ${appt.time}</span>
-                    </div>
-                    <button class="delete-btn" onclick="removeCalendarAppointment(${appt.id})" style="visibility:visible;">✕</button>
-                `;
-                listContainer.appendChild(li);
+            sorted.forEach(appt => {
+                const [, m, d] = appt.date.split('-');
+                const li = document.createElement('li'); li.className = 'task-item';
+                li.innerHTML = `<div><span style="font-weight:600;">${appt.text}</span><br><span style="font-size:0.78rem; color:var(--accent-color);">📅 ${m}/${d} @ ⏰ ${appt.time}</span></div><button class="delete-btn" onclick="removeCalendarAppointment(${appt.id})">✕</button>`;
+                container.appendChild(li);
             });
         }
 
-        // --- Tab 2: 🎨 Note Matrix ---
-        function addNewNote() {
-            appState.notes.push({ id: Date.now(), text: '', theme: 'white' });
-            saveAppState();
-        }
-
-        function updateNoteText(id, text) {
-            const note = appState.notes.find(n => n.id === id);
-            if (note) note.text = text;
-            localStorage.setItem('macbook_workspace_v10', JSON.stringify(appState));
-        }
-
-        function changeNoteColor(id, themeName) {
-            const note = appState.notes.find(n => n.id === id);
-            if (note) note.theme = themeName;
-            saveAppState();
-        }
-
-        function deleteNote(id) {
-            appState.notes = appState.notes.filter(n => n.id !== id);
-            saveAppState();
-        }
-
+        // --- Notes Module ---
+        function addNewNote() { appState.notes.push({ id: Date.now(), text: '', theme: 'white' }); saveAppState(); }
+        function updateNoteText(id, text) { const n = appState.notes.find(x => x.id === id); if (n) n.text = text; localStorage.setItem('macbook_workspace_v11', JSON.stringify(appState)); }
+        function changeNoteColor(id, th) { const n = appState.notes.find(x => x.id === id); if (n) n.theme = th; saveAppState(); }
+        function deleteNote(id) { appState.notes = appState.notes.filter(x => x.id !== id); saveAppState(); }
         function renderPaletteNotes() {
-            const container = document.getElementById('notesContainer');
-            if(!container) return;
-            container.innerHTML = '';
-
-            appState.notes.forEach(note => {
-                const pad = document.createElement('div');
-                pad.className = `note-pad note-${note.theme}`;
-                if(note.theme === 'white') pad.style.background = 'var(--note-white)';
-                if(note.theme === 'sage') pad.style.background = 'var(--note-sage)';
-                if(note.theme === 'amber') pad.style.background = 'var(--note-amber)';
-                if(note.theme === 'dark') { pad.style.background = 'var(--note-dark)'; pad.style.color = '#ffffff'; }
-
-                pad.innerHTML = `
-                    <textarea class="note-textarea" onkeyup="updateNoteText(${note.id}, this.value)" placeholder="Write your thought nodes here...">${note.text}</textarea>
-                    <div class="note-footer">
-                        <div class="color-selectors">
-                            <div class="color-dot" style="background:#ffffff;" onclick="changeNoteColor(${note.id}, 'white')"></div>
-                            <div class="color-dot" style="background:#eef7f2;" onclick="changeNoteColor(${note.id}, 'sage')"></div>
-                            <div class="color-dot" style="background:#fff9eb;" onclick="changeNoteColor(${note.id}, 'amber')"></div>
-                            <div class="color-dot" style="background:#1c1c1e;" onclick="changeNoteColor(${note.id}, 'dark')"></div>
-                        </div>
-                        <button class="delete-btn" onclick="deleteNote(${note.id})" style="font-weight:600; visibility:visible;">Delete Pad</button>
-                    </div>
-                `;
-                container.appendChild(pad);
+            const c = document.getElementById('notesContainer'); if(!c) return; c.innerHTML = '';
+            appState.notes.forEach(n => {
+                const p = document.createElement('div'); p.className = `note-pad note-${n.theme}`;
+                if(n.theme === 'white') p.style.background = 'var(--note-white)';
+                if(n.theme === 'sage') p.style.background = 'var(--note-sage)';
+                if(n.theme === 'amber') p.style.background = 'var(--note-amber)';
+                if(n.theme === 'dark') { p.style.background = 'var(--note-dark)'; p.style.color = '#fff'; }
+                p.innerHTML = `<textarea class="note-textarea" onkeyup="updateNoteText(${n.id}, this.value)" placeholder="Write thoughts...">${n.text}</textarea><div class="note-footer"><div class="color-selectors"><div class="color-dot" style="background:#ffffff;" onclick="changeNoteColor(${n.id}, 'white')"></div><div class="color-dot" style="background:#eef7f2;" onclick="changeNoteColor(${n.id}, 'sage')"></div><div class="color-dot" style="background:#fff9eb;" onclick="changeNoteColor(${n.id}, 'amber')"></div><div class="color-dot" style="background:#1c1c1e;" onclick="changeNoteColor(${n.id}, 'dark')"></div></div><button class="delete-btn" onclick="deleteNote(${n.id})" style="visibility:visible;">Delete</button></div>`;
+                c.appendChild(p);
             });
         }
 
-        // --- Tab 3: Student Pipeline System ---
+        // --- OSAP and Student Engine ---
+        function runOsapCalculator() {
+            const baseTuition = parseFloat(document.getElementById('calcProgram').value);
+            const livingStatus = document.getElementById('calcStatus').value;
+            let multiplier = livingStatus === 'independent' ? 1.25 : 1.00; 
+            let adjustedCost = baseTuition * multiplier;
+            document.getElementById('osapGrantOut').innerText = `$${(adjustedCost * 0.25).toFixed(2)}`;
+            document.getElementById('osapLoanOut').innerText = `$${(adjustedCost * 0.75).toFixed(2)}`;
+        }
+
         function addStudentLead() {
             const name = document.getElementById('stdName').value.trim();
             const email = document.getElementById('stdEmail').value.trim();
             const phone = document.getElementById('stdPhone').value.trim();
             const college = document.getElementById('stdCollege').value.trim();
-
-            if (!name || !college) { alert("Name and Target College are required metrics."); return; }
+            if (!name || !college) return;
             appState.students.push({ id: Date.now(), name, email, phone, college });
-            
-            document.getElementById('stdName').value = '';
-            document.getElementById('stdEmail').value = '';
-            document.getElementById('stdPhone').value = '';
-            document.getElementById('stdCollege').value = '';
+            document.getElementById('stdName').value = ''; document.getElementById('stdEmail').value = ''; document.getElementById('stdPhone').value = ''; document.getElementById('stdCollege').value = '';
             saveAppState();
         }
 
-        function removeStudentLead(id) {
-            appState.students = appState.students.filter(s => s.id !== id);
-            saveAppState();
-        }
-
+        function removeStudentLead(id) { appState.students = appState.students.filter(s => s.id !== id); saveAppState(); }
         function renderStudentLeads() {
-            const tbody = document.getElementById('studentTableBody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            appState.students.forEach(std => {
+            const b = document.getElementById('studentTableBody'); if(!b) return; b.innerHTML = '';
+            appState.students.forEach(s => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-weight:600;">${std.name}</td>
-                    <td>${std.email || '-'}</td>
-                    <td>${std.phone || '-'}</td>
-                    <td><span style="background:#e8e8ed; padding:3px 8px; border-radius:6px; font-size:0.85rem; font-weight:500;">${std.college}</span></td>
-                    <td><button class="delete-btn" onclick="removeStudentLead(${std.id})" style="visibility:visible;">✕</button></td>
-                `;
-                tbody.appendChild(tr);
+                tr.innerHTML = `<td style="font-weight:600;">${s.name}</td><td>${s.email || '-'}</td><td>${s.phone || '-'}</td><td><span style="background:#e8e8ed; padding:3px 8px; border-radius:6px; font-size:0.85rem;">${s.college}</span></td><td><button class="delete-btn" onclick="removeStudentLead(${s.id})" style="visibility:visible;">✕</button></td>`;
+                b.appendChild(tr);
             });
         }
-
         function filterStudentTable() {
-            const query = document.getElementById('tableSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#studentTableBody tr');
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
-            });
+            const q = document.getElementById('tableSearch').value.toLowerCase();
+            document.querySelectorAll('#studentTableBody tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
         }
 
-        // --- Knowledge Repository Capsule Data ---
+        // --- Copy system vault ---
+        function copyVaultText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => { alert("Copied Vault Template payload successfully to clipboard!"); });
+        }
+
+        // --- Financial Ledger Engine ---
+        function addFinancialTransaction() {
+            const desc = document.getElementById('finDesc').value.trim();
+            const type = document.getElementById('finType').value;
+            const amount = parseFloat(document.getElementById('finAmount').value);
+            if(!desc || isNaN(amount)) return;
+            appState.transactions.push({ id: Date.now(), desc, type, amount });
+            document.getElementById('finDesc').value = ''; document.getElementById('finAmount').value = '';
+            saveAppState();
+        }
+
+        function removeTransaction(id) { appState.transactions = appState.transactions.filter(t => t.id !== id); saveAppState(); }
+        
+        function renderFinancialLedger() {
+            const b = document.getElementById('financeTableBody'); if(!b) return; b.innerHTML = '';
+            let totalVol = 0; let netProf = 0;
+            appState.transactions.forEach(t => {
+                totalVol += t.amount;
+                if(t.type === 'income') netProf += t.amount; else netProf -= t.amount;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${t.desc}</td><td style="font-weight:600; color:${t.type==='income'?'#34c759':'#ff3b30'};">${t.type.toUpperCase()}</td><td>$${t.amount.toFixed(2)}</td><td><button class="delete-btn" onclick="removeTransaction(${t.id})" style="visibility:visible;">✕</button></td>`;
+                b.appendChild(tr);
+            });
+            document.getElementById('finTotalVolume').innerText = `$${totalVol.toFixed(2)}`;
+            const netProfEl = document.getElementById('finNetProfit');
+            netProfEl.innerText = `$${netProf.toFixed(2)}`;
+            netProfEl.style.color = netProf >= 0 ? 'var(--tag-low-text)' : 'var(--tag-high-text)';
+        }
+
+        // --- Knowledge Capsules Array ---
         const desktopKnowledgeRepo = [
             { title: "🌍 Earth Science Capsule", content: "The Earth's core is roughly as hot as the surface of the sun—clocking in at roughly 5,500 degrees Celsius (9,930 degrees Fahrenheit)." },
-            { title: "🔬 Deep Earth Trivia", content: "Diamonds are not born from compressed coal. Most diamonds recovered today were formed in the Earth's mantle billions of years ago, way before any land plants existed." },
-            { title: "🌊 Oceanographic Insight", content: "The planet's largest continuous mountain range isn't the Andes; it's the Mid-Oceanic Ridge system, spanning over 65,000 kilometers snaking along the ocean floor." },
-            { title: "🌋 Volcanology Fact", content: "The loudest sound ever recorded on Earth was the 1883 eruption of Krakatoa. It burst the eardrums of people 60 km away, and the shockwave circled the entire planet four full times." },
-            { title: "🌌 Atmospheric Dynamics", content: "Lightning bolts are roughly five times hotter than the visible surface of the sun, heating the surrounding air to 30,000 Kelvin instantly." }
+            { title: "🔬 Deep Earth Trivia", content: "Diamonds are not born from compressed coal. Most diamonds recovered today were formed in the Earth's mantle billions of years ago." },
+            { title: "🌋 Volcanology Fact", content: "The loudest sound ever recorded on Earth was the 1883 eruption of Krakatoa. The shockwave circled the entire planet four full times." }
         ];
 
         function deployDesktopTrivia() {
-            const index = new Date().getDate() % desktopKnowledgeRepo.length;
-            const item = desktopKnowledgeRepo[index];
-            const titleEl = document.getElementById('desktopTriviaTitle');
-            const contentEl = document.getElementById('desktopTriviaContent');
-            if(titleEl && contentEl) {
-                titleEl.innerHTML = `🧠 ${item.title}`;
-                contentEl.innerText = item.content;
-            }
+            const item = desktopKnowledgeRepo[new Date().getDate() % desktopKnowledgeRepo.length];
+            document.getElementById('desktopTriviaTitle').innerHTML = `🧠 ${item.title}`;
+            document.getElementById('desktopTriviaContent').innerText = item.content;
         }
 
-        // Run Initialization Matrix On Start
         window.onload = function() {
-            renderDesktopTasks();
-            renderCalendarMonthGrid();
-            renderUpcomingAppointmentsList();
-            renderPaletteNotes();
-            renderStudentLeads();
-            deployDesktopTrivia();
+            saveAppState(); runOsapCalculator(); deployDesktopTrivia();
         };
     </script>
 </body>
