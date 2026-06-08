@@ -73,7 +73,7 @@
 
         /* Universal Form Fields Layout */
         .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], select { 
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], select, textarea { 
             padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: #ffffff; font-size: 0.95rem; height: 42px; color: var(--text-main);
         }
         input[type="text"] { flex-grow: 2; }
@@ -84,7 +84,6 @@
         }
         .btn:hover { opacity: 0.9; }
         .btn-secondary { background: #e8e8ed; color: var(--text-main); }
-        .btn-danger { background: #ff3b30; color: #fff; }
 
         /* List Items Styling */
         .task-list { list-style: none; }
@@ -99,7 +98,7 @@
         .priority-medium { background-color: var(--tag-med-bg); color: var(--tag-med-text); }
         .priority-low { background-color: var(--tag-low-bg); color: var(--tag-low-text); }
 
-        /* 📅 CALENDAR BOX GRID STYLE */
+        /* 📅 CALENDAR DISPLAY STYLES */
         .cal-ctrl-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .cal-ctrl-title { font-size: 1.2rem; font-weight: 600; color: var(--text-main); }
         .cal-btn-group { display: flex; gap: 6px; }
@@ -113,50 +112,51 @@
         .calendar-cell-date.is-today-match { background: var(--accent-color); color: #ffffff !important; font-weight: 700; }
         .calendar-cell-date.has-events-dot::after { content: ''; width: 6px; height: 6px; background: #ff9500; border-radius: 50%; position: absolute; bottom: 4px; }
 
-        /* 🎨 PALETTE NOTE SYSTEM CLASSES */
+        /* 🎨 PALETTE NOTES */
         .notes-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 15px; }
         @media (min-width: 768px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
-        .note-pad { border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); transition: all 0.2s ease; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .note-pad { border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
         .note-textarea { width: 100%; height: 180px; border: none; background: transparent; resize: none; font-size: 1rem; outline: none; line-height: 1.5; color: inherit; }
         .note-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
         .color-selectors { display: flex; gap: 6px; }
         .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid #ffffff; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
 
-        /* 📋 DIRECTORY TABLES */
-        .osap-form, .finance-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        /* 📋 DIRECTORY TABLES & FORMS */
+        .osap-form, .finance-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
         .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
         .student-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; background: #fff; }
         .student-table th, .student-table td { padding: 14px 16px; border-bottom: 1px solid #f5f5f7; }
         .student-table th { background-color: #f5f5f7; font-weight: 600; color: var(--text-main); }
         .student-table tr:hover { background-color: #fafafa; }
 
-        /* 📑 TEMPLATE VAULT AND BOOKMARK DOCK */
+        /* 📑 COPIER VAULT TEXTAREAS */
         .vault-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .vault-grid { grid-template-columns: 1fr 1fr; } }
         .vault-card { border: 1px solid var(--border-color); padding: 18px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; background: #fafafa; }
-        .vault-text { background: #fff; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; font-size: 0.9rem; min-height: 100px; white-space: pre-wrap; color: #374151; }
+        .vault-textarea-editable { width: 100%; background: #fff; border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; font-size: 0.9rem; min-height: 140px; color: #374151; resize: vertical; line-height: 1.4; }
 
+        /* SYSTEM BOOKMARK LAUNCHPAD DOCK */
         .dock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
         .dock-link { background: #f5f5f7; border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); font-weight: 600; transition: all 0.2s; }
         .dock-link:hover { background: #fff; border-color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.05); transform: translateY(-2px); }
 
-        /* 🧮 CALC BOX */
+        /* 🧮 CALC OUTPUT WRAPPER */
         .calc-box { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #f5f5f7; padding: 15px; border-radius: 10px; margin-top: 15px; }
         .calc-num { font-size: 1.4rem; font-weight: 700; color: var(--accent-color); }
+        .pcc-notice-banner { background-color: #fef3c7; border: 1px solid #f59e0b; color: #b45309; padding: 12px 16px; border-radius: 10px; font-size: 0.88rem; font-weight: 500; margin-bottom: 15px; line-height: 1.4; }
 
-        /* Global Flag Image Fix */
-        img, svg, .emoji { width: 18px !important; height: 18px !important; max-width: 18px !important; display: inline-block !important; vertical-align: middle !important; margin: 0 2px !important; }
-        .feed-title img { width: 22px !important; height: 22px !important; }
-
-        /* Immigration News Matrix */
-        .news-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 992px) { .news-grid { grid-template-columns: repeat(3, 1fr); } }
-        .feed-box { background: #fafafa; border-radius: 10px; padding: 18px; border: 1px solid var(--border-color); }
-        .feed-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); }
-        .feed-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-        .feed-list li { font-size: 0.9rem; line-height: 1.45; border-bottom: 1px dashed #e5e7eb; padding-bottom: 10px; }
+        /* 🗺️ IMMIGRATION EXPANSION GRID MAP */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        @media (min-width: 768px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1100px) { .news-grid { grid-template-columns: repeat(3, 1fr); } }
+        .feed-box { background: #fafafa; border-radius: 12px; padding: 18px; border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.01); }
+        .feed-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color); color: #111827; }
+        .feed-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .feed-list li { font-size: 0.88rem; line-height: 1.45; border-bottom: 1px dashed #e5e7eb; padding-bottom: 10px; }
+        .feed-list li:last-child { border-bottom: none; padding-bottom: 0; }
         .feed-list li a { color: var(--accent-color); text-decoration: none; font-weight: 600; display: block; margin-bottom: 3px; }
         .feed-list li a:hover { text-decoration: underline; }
+        .feed-summary-text { font-size: 0.78rem; color: var(--text-secondary); display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -169,12 +169,12 @@
             <p id="desktopTriviaContent"></p>
         </div>
 
-        <!-- APP INTERFACE SWITCHBOARD NAVIGATION -->
+        <!-- APP SWITCHBOARD CHANNELS NAVIGATION -->
         <div class="tab-menu">
             <button class="tab-btn active" onclick="switchDesktopTab('desktop-workspace')">💼 My Workspace</button>
             <button class="tab-btn" onclick="switchDesktopTab('desktop-notes')">🎨 Palette Notes</button>
-            <button class="tab-btn" onclick="switchDesktopTab('desktop-osap')">📋 OSAP Pipeline & Calc</button>
-            <button class="tab-btn" onclick="switchDesktopTab('desktop-vault')">📑 Document Copier Vault</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-osap')">📋 PCC OSAP Pipeline & Calc</button>
+            <button class="tab-btn" onclick="switchDesktopTab('desktop-vault')">📑 Custom Copier Vault</button>
             <button class="tab-btn" onclick="switchDesktopTab('desktop-finance')">💰 Cash Flow & Expenses</button>
             <button class="tab-btn" onclick="switchDesktopTab('desktop-immigration')">🗺️ Immigration News Terminal</button>
         </div>
@@ -232,14 +232,14 @@
 
             </div>
 
-            <!-- IDEA 5: QUICK LAUNCH BOOKMARK DOCK -->
+            <!-- SYSTEM LINKS QUICK LAUNCH MOUNTED DOCK -->
             <div class="card">
                 <h2>🔗 System Quick-Launch Dock</h2>
                 <div class="dock-grid">
                     <a href="https://graduatetrack.com" target="_blank" class="dock-link">🌐 Graduate Track Home</a>
-                    <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/account.html" target="_blank" class="dock-link">🍁 IRCC Portal Secure Gateway</a>
+                    <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/application/account.html" target="_blank" class="dock-link">🍁 IRCC Portal Gateway</a>
                     <a href="https://business.facebook.com/" target="_blank" class="dock-link">📈 Meta Business Suite Console</a>
-                    <a href="https://search.google.com/search-console" target="_blank" class="dock-link">🔍 Google Search Console Hub</a>
+                    <a href="https://search.google.com/search-console" target="_blank" class="dock-link">🔍 Google Search Hub</a>
                 </div>
             </div>
         </div>
@@ -254,61 +254,64 @@
             </div>
         </div>
 
-        <!-- ================= TAB 3: 📋 OSAP REGISTER & IDEA 1: DYNAMIC ESTIMATOR ================= -->
+        <!-- ================= TAB 3: 📋 INTERACTIVE MANUAL MANIPULATION PCC CALC & STORAGE ================= -->
         <div id="desktop-osap" class="tab-content">
             <div class="dashboard-grid" style="grid-template-columns: 1fr;">
                 
-                <!-- OSAP Formula Estimator Tool Box -->
+                <!-- Manual Calculator Element Module -->
                 <div class="card">
-                    <h2>🧮 Quick Tuition Funding Ratio Calculator (Ontario Rules)</h2>
-                    <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:15px;">Instantly gauge estimates during consultation calls. Factors contemporary baseline funding parameters.</p>
+                    <h2>🧮 Private Career College (PCC) OSAP Funding Estimator</h2>
+                    
+                    <div class="pcc-notice-banner">
+                        ⏳ <b>Historical Rule Framework Active:</b> In alignment with Ontario's post-secondary rebalancing directives, private career colleges shift entirely to 100% loans starting August 2026. This module calculates funding benchmarks applying the legacy <b>85% Grant / 15% Loan split ratio thresholds</b>, applicable exclusively to intakes commencing on or before <b>July 30, 2026</b>.
+                    </div>
+
                     <div class="osap-form" style="margin-bottom:0;">
                         <div>
-                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Program Discipline Sector</label>
-                            <select id="calcProgram" onchange="runOsapCalculator()" style="width:100%;">
-                                <option value="6500">General College Diploma ($6,500/yr)</option>
-                                <option value="11000">Advanced Technology / Engineering ($11,000/yr)</option>
-                                <option value="9500">Nursing / Health Sciences ($9,500/yr)</option>
-                                <option value="16000">Post-Grad Master Track Programs ($16,000/yr)</option>
-                            </select>
+                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Manual Course Tuition Cost ($ CAD)</label>
+                            <input type="number" id="pccManualTuition" oninput="runPccOsapCalculator()" placeholder="e.g. 12500" value="14000">
                         </div>
                         <div>
-                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Student Status Profile</label>
-                            <select id="calcStatus" onchange="runOsapCalculator()" style="width:100%;">
-                                <option value="at-home">Living At Home / Dependent</option>
-                                <option value="independent">Living Independently / Renting</option>
+                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Course Duration Timeline (Weeks)</label>
+                            <input type="number" id="pccManualWeeks" oninput="runPccOsapCalculator()" placeholder="e.g. 52" value="44">
+                        </div>
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:4px;">Student Residential Status</label>
+                            <select id="pccCalcStatus" onchange="runPccOsapCalculator()" style="width:100%;">
+                                <option value="dependent">Living At Home / Dependent</option>
+                                <option value="independent" selected>Living Independently (Renting Allowance)</option>
                             </select>
                         </div>
                     </div>
                     
                     <div class="calc-box">
                         <div>
-                            <div class="score-label">Est. Provincial Grants (25%)</div>
-                            <div class="calc-num" id="osapGrantOut">$0.00</div>
+                            <div class="score-label">Est. Non-Repayable Grants (Max 85% Split Value)</div>
+                            <div class="calc-num" style="color: #34c759;" id="pccGrantOut">$0.00</div>
                         </div>
                         <div>
-                            <div class="score-label">Est. Repayable Loans (75%)</div>
-                            <div class="calc-num" style="color:#d97706;" id="osapLoanOut">$0.00</div>
+                            <div class="score-label">Est. Repayable Student Loans (15% Legacy Allocation Base)</div>
+                            <div class="calc-num" style="color:#ff9500;" id="pccLoanOut">$0.00</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Intake Logs -->
+                <!-- Intake Logs Database Grid -->
                 <div class="card">
-                    <h2>📋 OSAP Interest Intake Registry</h2>
+                    <h2>📋 PCC Applicant Intake Registry</h2>
                     <div class="osap-form">
-                        <input type="text" id="stdName" placeholder="Full Name">
+                        <input type="text" id="stdName" placeholder="Full Applicant Name">
                         <input type="email" id="stdEmail" placeholder="Email Address">
                         <input type="tel" id="stdPhone" placeholder="Phone Number">
-                        <input type="text" id="stdCollege" placeholder="Target College Name">
+                        <input type="text" id="stdCollege" placeholder="Target Career College Institution">
                     </div>
                     <button class="btn" style="width: 100%;" onclick="addStudentLead()">Add Student to Interest Roster</button>
                     <hr>
-                    <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="🔍 Instant search by name or college filter...">
+                    <input type="text" id="tableSearch" onkeyup="filterStudentTable()" placeholder="🔍 Instant search filtering metrics...">
                     <div class="table-responsive">
                         <table class="student-table">
                             <thead>
-                                <tr><th>Name</th><th>Email Address</th><th>Phone Number</th><th>Target College</th><th>Action</th></tr>
+                                <tr><th>Name</th><th>Email Address</th><th>Phone Number</th><th>Target Institution</th><th>Action</th></tr>
                             </thead>
                             <tbody id="studentTableBody"></tbody>
                         </table>
@@ -318,29 +321,45 @@
             </div>
         </div>
 
-        <!-- ================= TAB 4: IDEA 3: EMAIL & DOCUMENT VAULT ================= -->
+        <!-- ================= TAB 4: EDITABLE DOCUMENT & EMAIL VAULT COPIER ================= -->
         <div id="desktop-vault" class="tab-content">
             <div class="card">
-                <h2>📑 Document Copier Vault</h2>
-                <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px;">One-click copy systems to speed up applicant communications. Speeds up lead generation outreach.</p>
+                <h2>📑 Custom Document & Message Copier Vault</h2>
+                <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px;">Feel free to customize, rewrite, or store your own versions of these response templates. Any changes you type will persist automatically in storage, and you can click the copy button to instantly pull it to your MacBook clipboard.</p>
                 
                 <div class="vault-grid">
+                    <!-- Text Module 1 -->
                     <div class="vault-card">
-                        <h4>✉️ OSAP Follow-up Briefing</h4>
-                        <div class="vault-text" id="t1">Hi there,\n\nThank you for reaching out regarding your interest in Ontario higher education pathways. \n\nPlease note that applications for funding assistance parameters are active. We look forward to evaluating your program mapping framework.\n\nBest regards,\nGraduate Track Team</div>
-                        <button class="btn btn-secondary" onclick="copyVaultText('t1')">📋 Copy Text to Clipboard</button>
+                        <h4>✉️ OSAP Action Checklist Follow-Up (Email/SMS)</h4>
+                        <textarea class="vault-textarea-editable" id="vTxt1" onkeyup="persistVaultTemplates()"></textarea>
+                        <button class="btn btn-secondary" onclick="copyCustomVaultText('vTxt1')">📋 Copy Version to Clipboard</button>
                     </div>
                     
+                    <!-- Text Module 2 -->
                     <div class="vault-card">
-                        <h4>📋 Academic Transcript Checklist</h4>
-                        <div class="vault-text" id="t2">Hello,\n\nTo move forward with your profile assessment, please reply with scanned clear copies of:\n1. Secondary School Graduation Diplomas\n2. Complete Semester Transcripts\n3. English Proficiency Score Sheets (if applicable)\n\nThank you!</div>
-                        <button class="btn btn-secondary" onclick="copyVaultText('t2')">📋 Copy Text to Clipboard</button>
+                        <h4>📋 Preliminary Career College Inquiry Response</h4>
+                        <textarea class="vault-textarea-editable" id="vTxt2" onkeyup="persistVaultTemplates()"></textarea>
+                        <button class="btn btn-secondary" onclick="copyCustomVaultText('vTxt2')">📋 Copy Version to Clipboard</button>
+                    </div>
+
+                    <!-- Text Module 3 -->
+                    <div class="vault-card">
+                        <h4>📱 Rapid SMS Document Requirement Ping</h4>
+                        <textarea class="vault-textarea-editable" id="vTxt3" onkeyup="persistVaultTemplates()"></textarea>
+                        <button class="btn btn-secondary" onclick="copyCustomVaultText('vTxt3')">📋 Copy Version to Clipboard</button>
+                    </div>
+
+                    <!-- Text Module 4 -->
+                    <div class="vault-card">
+                        <h4>💼 Immigration Document Request Template</h4>
+                        <textarea class="vault-textarea-editable" id="vTxt4" onkeyup="persistVaultTemplates()"></textarea>
+                        <button class="btn btn-secondary" onclick="copyCustomVaultText('vTxt4')">📋 Copy Version to Clipboard</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 5: IDEA 4: BUSINESS FINANCE LEDGER ================= -->
+        <!-- ================= TAB 5: BUSINESS EXPENSE FINANCE LEDGER ================= -->
         <div id="desktop-finance" class="tab-content">
             <div class="card">
                 <h2>💰 Cash Flow Ledger & Business Expenses</h2>
@@ -358,7 +377,7 @@
 
                 <div class="calc-box" style="margin-bottom:25px; background:#fff; border:1px solid var(--border-color);">
                     <div>
-                        <div class="score-label">Total Volume Tracked</div>
+                        <div class="score-label">Total Cash Volume Tracked</div>
                         <div class="calc-num" style="color:var(--text-main);" id="finTotalVolume">$0.00</div>
                     </div>
                     <div>
@@ -378,29 +397,64 @@
             </div>
         </div>
 
-        <!-- ================= TAB 6: GLOBAL IMMIGRATION TRACKER ================= -->
+        <!-- ================= TAB 6: COMPLETE 6-COUNTRY IMMIGRATION PORTAL ================= -->
         <div id="desktop-immigration" class="tab-content">
             <div class="card">
-                <h2>🗺️ Multi-National Immigration Update Portal</h2>
-                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 22px;">Monitors structural rules, policy changes, and visa window adjustments dynamically.</p>
+                <h2 style="font-size: 1.5rem; margin-bottom: 5px;">🗺️ Multi-National Immigration Policy Update Terminal</h2>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 25px;">Tracks contemporary regulatory frameworks, international mobility rules, and fast-track processing checkpoints across targeted regions.</p>
+                
                 <div class="news-grid">
+                    <!-- Australia -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇦🇺 Australia (Department of Home Affairs)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels" target="_blank">Migration Planning Benchmarks</a><span class="feed-summary-text">Ongoing caps monitoring onshore conversions to evaluate skilled pathway entries.</span></li>
+                            <li><a href="https://immi.homeaffairs.gov.au/" target="_blank">Points Allocation Structural Review</a><span class="feed-summary-text">Weight modification rules adjustment favoring core science and engineering applicants.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Canada -->
                     <div class="feed-box">
                         <div class="feed-title">🇨🇦 Canada (IRCC)</div>
                         <ul class="feed-list">
-                            <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html" target="_blank">IRCC Levels Plan Adjustment</a><span style="font-size:0.78rem; color:var(--text-secondary);">Baseline tracking through 2028.</span></li>
-                            <li><a href="https://www.cicnews.com/" target="_blank">Provincial Nomination Draws</a><span style="font-size:0.78rem; color:var(--text-secondary);">Regional allocations targeting specialized profiles.</span></li>
+                            <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/mandate/corporate-initiatives/levels/supplementary-immigration-levels-2026-2028.html" target="_blank">IRCC Multi-Year Level Adjustments</a><span class="feed-summary-text">Strategic framework stabilizing processing pathways through 2028.</span></li>
+                            <li><a href="https://www.cicnews.com/" target="_blank">Express Entry / PNP Allocations</a><span class="feed-summary-text">Category-specific rounds prioritizing tech, trade, and health care resources.</span></li>
                         </ul>
                     </div>
+
+                    <!-- Malaysia -->
                     <div class="feed-box">
-                        <div class="feed-title">🇦🇺 Australia (Home Affairs)</div>
+                        <div class="feed-title">🇲🇾 Malaysia (Immigration Department)</div>
                         <ul class="feed-list">
-                            <li><a href="https://immi.homeaffairs.gov.au/what-we-do/migration-program-planning-levels" target="_blank">Migration Planning Levels</a><span style="font-size:0.78rem; color:var(--text-secondary);">Framework constraints updates on expansion parameters.</span></li>
+                            <li><a href="https://www.imi.gov.my/" target="_blank">MM2H Residency Criteria Revisions</a><span class="feed-summary-text">Tiered financial deposits structures active with streamlined verification tracks.</span></li>
+                            <li><a href="https://mdec.my/" target="_blank">DE Rantau Digital Nomad Pass Extension</a><span class="feed-summary-text">Broadening target geographic hubs for certified foreign remote technicians.</span></li>
                         </ul>
                     </div>
+
+                    <!-- New Zealand -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇳🇿 New Zealand (Immigration New Zealand)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.immigration.govt.nz/" target="_blank">AEWV Threshold Enforcement Rules</a><span class="feed-summary-text">Enhanced skill checks and baseline English requirements across primary sectors.</span></li>
+                            <li><a href="https://www.immigration.govt.nz/" target="_blank">Green List Straight to Residence Scope</a><span class="feed-summary-text">Fast-track pathways for architectural and civil engineering professionals.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- United Kingdom -->
                     <div class="feed-box">
                         <div class="feed-title">🇬🇧 United Kingdom (Home Office)</div>
                         <ul class="feed-list">
-                            <li><a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank">Skilled Worker Payroll Rules</a><span style="font-size:0.78rem; color:var(--text-secondary);">Mandatory localization compliance rules adjustments.</span></li>
+                            <li><a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank">Skilled Worker Base Salary Baseline</a><span class="feed-summary-text">Adjustment parameters checking localized employer compensation compliance.</span></li>
+                            <li><a href="https://www.gov.uk/global-talent" target="_blank">Global Talent Visa Endorsements</a><span class="feed-summary-text">Accelerated structural tracking for data science and AI pioneers.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- USA -->
+                    <div class="feed-box">
+                        <div class="feed-title">🇺🇸 United States (USCIS / DOS)</div>
+                        <ul class="feed-list">
+                            <li><a href="https://www.uscis.gov/" target="_blank">USCIS AOS Evaluation Directives</a><span class="feed-summary-text">Operational mandate updates adjusting processing parameters inside regional centers.</span></li>
+                            <li><a href="https://travel.state.gov/" target="_blank">Visa Bulletin Timeline Projections</a><span class="feed-summary-text">Monthly priority threshold logs for family preference and employment categories.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -409,21 +463,28 @@
 
     </div>
 
-    <!-- CODE INTERACTIONS CORE COMPONENT ACTIONS ENGINE -->
+    <!-- CORE LOGIC RENDER MATRIX ENGINE -->
     <script>
-        // Master storage dictionary v11
-        let appState = JSON.parse(localStorage.getItem('macbook_workspace_v11')) || {
+        // Standardized centralized object map configuration v12
+        let appState = JSON.parse(localStorage.getItem('macbook_workspace_v12')) || {
             tasks: [],
             appointments: [],
-            notes: [{ id: 1, text: "Graduate Track command center dashboard loaded...", theme: "white" }],
+            notes: [{ id: 1, text: "Graduate Track executive interface active...", theme: "white" }],
             students: [],
-            transactions: []
+            transactions: [],
+            // Fallback base values for custom text templates
+            customTemplates: {
+                vTxt1: "Hi [Student Name],\n\nThis is a quick check-in from Graduate Track regarding your Private Career College OSAP timeline. Please note that to secure legacy grant distributions, your registry must finalize before the upcoming cut-off checkpoints.\n\nLet's schedule a brief sync to process your files!\n\nBest,\nGraduate Track Desk",
+                vTxt2: "Hello,\n\nThank you for exploring course offerings. To check your enrollment eligibility metrics for our partner Private Career Colleges in Ontario, please send over:\n- High school graduation diploma copy\n- Government issued photo identification\n\nOur automated intake estimators are standing by to review your parameters.\n\nRegards,\nAdmissions Team",
+                vTxt3: "ALERT: Graduate Track checklist follow-up. We need your updated registration fee receipt and signed course enrollment document to unlock your timeline. Please upload immediately.",
+                vTxt4: "Dear Client,\n\nRegarding your skilled professional file matrix, please collect and arrange clear digital copies of work experience logs, passport credentials, and regional certification benchmarks.\n\nOur tracker terminal will evaluate compliance immediately upon delivery.\n\nBest regards,\nImmigration Coordinator Desk"
+            }
         };
 
         let currentCalendarDate = new Date();
 
         function saveAppState() {
-            localStorage.setItem('macbook_workspace_v11', JSON.stringify(appState));
+            localStorage.setItem('macbook_workspace_v12', JSON.stringify(appState));
             renderDesktopTasks();
             renderCalendarMonthGrid();
             renderUpcomingAppointmentsList();
@@ -439,7 +500,7 @@
             event.target.classList.add('active');
         }
 
-        // --- Core Tasks engine ---
+        // --- Checklist Engines ---
         function addDesktopTask() {
             const input = document.getElementById('desktopTaskInput');
             const priority = document.getElementById('desktopPriorityInput').value;
@@ -484,7 +545,7 @@
             });
         }
 
-        // --- Calendar Engine ---
+        // --- Calendar Grid Mechanics ---
         function navigateCalendarMonth(direction) {
             currentCalendarDate.setMonth(currentCalendarDate.getMonth() + direction);
             renderCalendarMonthGrid();
@@ -514,7 +575,7 @@
                 const cell = document.createElement('div'); cell.className = 'calendar-cell-date'; cell.innerText = day;
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 if(day === todayObj.getDate() && month === todayObj.getMonth() && year === todayObj.getFullYear()) cell.classList.add('is-today-match');
-                if (appState.appointments.some(appt => appt.date === dateStr)) cell.classList.add('has-events-dot');
+                if (appState.appointments && appState.appointments.some(appt => appt.date === dateStr)) cell.classList.add('has-events-dot');
                 gridContainer.appendChild(cell);
             }
         }
@@ -524,6 +585,7 @@
             const date = document.getElementById('apptDate');
             const time = document.getElementById('apptTime');
             if(!text.value.trim() || !date.value) return;
+            if(!appState.appointments) appState.appointments = [];
             appState.appointments.push({ id: Date.now(), text: text.value.trim(), date: date.value, time: time.value || '00:00' });
             text.value = ''; date.value = ''; time.value = '';
             saveAppState();
@@ -537,6 +599,7 @@
         function renderUpcomingAppointmentsList() {
             const container = document.getElementById('upcomingAppointmentsList');
             if(!container) return; container.innerHTML = '';
+            if(!appState.appointments) appState.appointments = [];
             const sorted = [...appState.appointments].sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
             if(sorted.length === 0) {
                 container.innerHTML = `<li style="font-size:0.88rem; color:var(--text-secondary); text-align:center; padding:15px 0;">No active appointments.</li>`;
@@ -550,9 +613,9 @@
             });
         }
 
-        // --- Notes Module ---
+        // --- Notes Management ---
         function addNewNote() { appState.notes.push({ id: Date.now(), text: '', theme: 'white' }); saveAppState(); }
-        function updateNoteText(id, text) { const n = appState.notes.find(x => x.id === id); if (n) n.text = text; localStorage.setItem('macbook_workspace_v11', JSON.stringify(appState)); }
+        function updateNoteText(id, text) { const n = appState.notes.find(x => x.id === id); if (n) n.text = text; localStorage.setItem('macbook_workspace_v12', JSON.stringify(appState)); }
         function changeNoteColor(id, th) { const n = appState.notes.find(x => x.id === id); if (n) n.theme = th; saveAppState(); }
         function deleteNote(id) { appState.notes = appState.notes.filter(x => x.id !== id); saveAppState(); }
         function renderPaletteNotes() {
@@ -568,14 +631,28 @@
             });
         }
 
-        // --- OSAP and Student Engine ---
-        function runOsapCalculator() {
-            const baseTuition = parseFloat(document.getElementById('calcProgram').value);
-            const livingStatus = document.getElementById('calcStatus').value;
-            let multiplier = livingStatus === 'independent' ? 1.25 : 1.00; 
-            let adjustedCost = baseTuition * multiplier;
-            document.getElementById('osapGrantOut').innerText = `$${(adjustedCost * 0.25).toFixed(2)}`;
-            document.getElementById('osapLoanOut').innerText = `$${(adjustedCost * 0.75).toFixed(2)}`;
+        // --- 🏫 Tab 3: Refactored Manual Private Career College OSAP Framework ---
+        function runPccOsapCalculator() {
+            const manualTuition = parseFloat(document.getElementById('pccManualTuition').value) || 0;
+            const courseWeeks = parseFloat(document.getElementById('pccManualWeeks').value) || 0;
+            const residencyStatus = document.getElementById('pccCalcStatus').value;
+
+            // Basic baseline algorithm computing weekly living allowance + course instrumentation costs
+            let baseLivingAllowanceWeekly = residencyStatus === 'independent' ? 320 : 110;
+            let totalLivingAllowanceAllocation = courseWeeks * baseLivingAllowanceWeekly;
+            
+            // Total financial aid envelope ceiling
+            let maxTotalAssessableNeed = manualTuition + totalLivingAllowanceAllocation;
+
+            // Legacy Private Career College Split Allocations (Up to 85% grant availability pre-Aug 2026 cuts)
+            let estimatedGrantOutput = maxTotalAssessableNeed * 0.85;
+            let estimatedLoanOutput = maxTotalAssessableNeed * 0.15;
+
+            // Caps security check limits to mimic average provincial single enrollment disbursements
+            if(estimatedGrantOutput > manualTuition * 1.1) estimatedGrantOutput = manualTuition * 0.95;
+
+            document.getElementById('pccGrantOut').innerText = `$${estimatedGrantOutput.toFixed(2)}`;
+            document.getElementById('pccLoanOut').innerText = `$${estimatedLoanOutput.toFixed(2)}`;
         }
 
         function addStudentLead() {
@@ -603,10 +680,34 @@
             document.querySelectorAll('#studentTableBody tr').forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
         }
 
-        // --- Copy system vault ---
-        function copyVaultText(elementId) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => { alert("Copied Vault Template payload successfully to clipboard!"); });
+        // --- 📑 Tab 4: Refactored Live Editable Copier Vault Framework ---
+        function initializeVaultTemplates() {
+            if(!appState.customTemplates) {
+                appState.customTemplates = { vTxt1: '', vTxt2: '', vTxt3: '', vTxt4: '' };
+            }
+            // Hydrate values inside document boxes elements
+            document.getElementById('vTxt1').value = appState.customTemplates.vTxt1 || '';
+            document.getElementById('vTxt2').value = appState.customTemplates.vTxt2 || '';
+            document.getElementById('vTxt3').value = appState.customTemplates.vTxt3 || '';
+            document.getElementById('vTxt4').value = appState.customTemplates.vTxt4 || '';
+        }
+
+        function persistVaultTemplates() {
+            appState.customTemplates.vTxt1 = document.getElementById('vTxt1').value;
+            appState.customTemplates.vTxt2 = document.getElementById('vTxt2').value;
+            appState.customTemplates.vTxt3 = document.getElementById('vTxt3').value;
+            appState.customTemplates.vTxt4 = document.getElementById('vTxt4').value;
+            // Write directly to sandbox localStorage text dump string
+            localStorage.setItem('macbook_workspace_v12', JSON.stringify(appState));
+        }
+
+        function copyCustomVaultText(textAreaId) {
+            const targetTextArea = document.getElementById(textAreaId);
+            if(!targetTextArea) return;
+            
+            navigator.clipboard.writeText(targetTextArea.value).then(() => {
+                alert("Copied custom template payload string securely onto your clipboard!");
+            });
         }
 
         // --- Financial Ledger Engine ---
@@ -638,7 +739,7 @@
             netProfEl.style.color = netProf >= 0 ? 'var(--tag-low-text)' : 'var(--tag-high-text)';
         }
 
-        // --- Knowledge Capsules Array ---
+        // --- Hand Curated Trivia Index Engine ---
         const desktopKnowledgeRepo = [
             { title: "🌍 Earth Science Capsule", content: "The Earth's core is roughly as hot as the surface of the sun—clocking in at roughly 5,500 degrees Celsius (9,930 degrees Fahrenheit)." },
             { title: "🔬 Deep Earth Trivia", content: "Diamonds are not born from compressed coal. Most diamonds recovered today were formed in the Earth's mantle billions of years ago." },
@@ -651,8 +752,17 @@
             document.getElementById('desktopTriviaContent').innerText = item.content;
         }
 
+        // Master runtime load execution matrix sequence block
         window.onload = function() {
-            saveAppState(); runOsapCalculator(); deployDesktopTrivia();
+            renderDesktopTasks();
+            renderCalendarMonthGrid();
+            renderUpcomingAppointmentsList();
+            renderPaletteNotes();
+            renderStudentLeads();
+            initializeVaultTemplates();
+            renderFinancialLedger();
+            runPccOsapCalculator(); 
+            deployDesktopTrivia();
         };
     </script>
 </body>
